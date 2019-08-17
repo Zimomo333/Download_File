@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<h1>资源下载:</h1>
+<p> 单纯地使用a标签时，只有浏览器不能解析的文件才会是下载，否则将被浏览器直接解析。</p>
+<a href="../resource/test.html" >test.html</a><br>
+
+
+<p>因此，使用a标签结合servlet的response指示浏览器不解析这些待下载文件</p>
+<a href="../download?filename=test.html" >test.html</a><br>
+</body>
+</html>
