@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.*;
+import com.alibaba.fastjson.JSON;
 
 @WebServlet("/Get_File")
 public class Get_File extends HttpServlet {
@@ -70,7 +71,10 @@ public class Get_File extends HttpServlet {
             e.printStackTrace();
             System.out.println("抛出异常！！");
         }
-
+        //解决ajax返回json数据中文乱码
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(JSON.toJSONString(fileName));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

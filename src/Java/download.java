@@ -1,7 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +24,12 @@ public class download extends HttpServlet {
         String filePath = request.getServletContext().getRealPath("resource/"+filename);
 
         //3.设置响应头，提示浏览器不要解析响应的文件数据，而是以附件(attachment)的形式解析，即下载功能
-        response.setContentType(this.getServletContext().getMimeType(filename));
-        response.setHeader("Content-Disposition", "attachment;filename="+filename);
+
+        //解决下载文件中文乱码
+        String New_filename = URLEncoder.encode(filename,"UTF-8");
+
+        response.setContentType(this.getServletContext().getMimeType(New_filename));
+        response.setHeader("Content-Disposition", "attachment;filename="+New_filename);
 
         //4.读取文件的 输入流，以及响应的输出流，并将数据输出给客户端
         InputStream in = new FileInputStream(filePath);
