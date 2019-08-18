@@ -10,12 +10,11 @@ import java.net.*;
 public class Get_File extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1.获取请求下载的文件名
-        String url = request.getParameter("url");
-        String fileName = url.substring(url.lastIndexOf("/"));
 
-        //System.out.println("fileName---->"+filePath);
-        //创建不同的文件夹目录
+        String url = request.getParameter("url");
+        String fileName = null;
+
+        //下载到文件夹目录
         File file=new File("C:\\Users\\Zimomo\\IdeaProjects\\Download_File\\web\\resource");
         //判断文件夹是否存在
         if (!file.exists())
@@ -30,6 +29,13 @@ public class Get_File extends HttpServlet {
         {
             // 建立链接
             URL httpUrl=new URL(url);
+
+            //1.获取请求下载的文件名
+            URLConnection uc = httpUrl.openConnection();
+            fileName = uc.getHeaderField("Content-Disposition");
+            fileName = new String(fileName.getBytes("ISO-8859-1"), "GBK");
+            fileName = URLDecoder.decode(fileName.substring(fileName.indexOf("filename*=utf-8''")+17),"UTF-8");
+
             conn=(HttpURLConnection) httpUrl.openConnection();
             //以Post方式提交表单，默认get方式
             conn.setRequestMethod("GET");
