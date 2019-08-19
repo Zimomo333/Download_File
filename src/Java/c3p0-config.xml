@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <default-config>
+        <property name="driverClass">org.h2.Driver</property>
+        <property name="jdbcUrl">jdbc:h2:~/download</property>
+        <property name="user">zimomo</property>
+        <property name="password">333</property>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>5
+        <property name="maxStatements">200</property>
+    </default-config>
+    <!--配置-->
+
+</c3p0-config>
